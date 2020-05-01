@@ -84,8 +84,7 @@ public class LinkedList {
     public Integer getLast(int index) {
         if (index < 0) return null;
         int count = -index;
-        Node front = header;
-        Node t = header;
+        Node front = header, t = header;
         while ((t = t.next) != null) {
             count++;
             if (count > 0) front = front.next;
