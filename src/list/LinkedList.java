@@ -9,6 +9,7 @@ public class LinkedList {
     private class Node {
         Integer data;
         Node next;
+
         //创建链表的节点对象
         private Node(Integer data, Node next) {
             this.data = data;
@@ -16,6 +17,7 @@ public class LinkedList {
             this.next = next;
         }
     }
+
     //创建头节点方便操作链表
     Node header;
     private int size;
@@ -24,6 +26,7 @@ public class LinkedList {
         header = new Node(null, null);
         size = 0;
     }
+
     //在指定位置添加元素
     public boolean add(int index, int d) {
         Node t = header;
@@ -76,6 +79,18 @@ public class LinkedList {
         } else {
             return false;
         }
+    }
+
+    public Integer getLast(int index) {
+        if (index < 0) return null;
+        int count = -index;
+        Node front = header;
+        Node t = header;
+        while ((t = t.next) != null) {
+            count++;
+            if (count > 0) front = front.next;
+        }
+        return front == header ? null : front.data;
     }
 
     public Integer get(int index) {
