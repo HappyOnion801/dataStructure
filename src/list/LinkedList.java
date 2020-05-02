@@ -5,7 +5,7 @@ package list;
  * @ Date: 2020-05-01
  * @ Github: HappyOnion801
  */
-public class LinkedList {
+public class LinkedList implements List {
     private class Node {
         Integer data;
         Node next;
@@ -27,8 +27,16 @@ public class LinkedList {
         size = 0;
     }
 
-    //在指定位置添加元素
-    public boolean add(int index, int d) {
+    @Override
+    public void add(Integer data) {
+        Node t = header;
+        while (t.next != null) t = t.next;
+        t.next = new Node(data, null);
+        size++;
+    }
+
+    @Override
+    public boolean add(int index, Integer d) {
         Node t = header;
         //查找需要操作的对象的直接前驱
         while (index != 0 && t != null) {
@@ -45,13 +53,7 @@ public class LinkedList {
         }
     }
 
-    public void add(int data) {
-        Node t = header;
-        while (t.next != null) t = t.next;
-        t.next = new Node(data, null);
-        size++;
-    }
-
+    @Override
     public boolean delete(int index) {
         Node t = header;
         while (index != 0 && t.next != null) {
@@ -67,7 +69,8 @@ public class LinkedList {
         }
     }
 
-    public boolean set(int index, int date) {
+    @Override
+    public boolean set(int index, Integer date) {
         Node t = header;
         while (index != 0 && t.next != null) {
             index--;
@@ -81,10 +84,20 @@ public class LinkedList {
         }
     }
 
+    @Override
+    public Integer get(int index) {
+        Node t = header;
+        while (index != 0 && t.next != null) {
+            index--;
+            t = t.next;
+        }
+        return t.next == null ? null : t.next.data;
+    }
+
     public Integer getLast(int index) {
         if (index < 0) return null;
         int count = -index;
-        Node front = header, t = header;
+        Node front = header,t  = header;
         while ((t = t.next) != null) {
             count++;
             if (count > 0) front = front.next;
@@ -92,18 +105,6 @@ public class LinkedList {
         return front == header ? null : front.data;
     }
 
-    public Integer get(int index) {
-        Node t = header;
-        while (index != 0 && t.next != null) {
-            index--;
-            t = t.next;
-        }
-        if (t.next != null) {
-            return t.next.data;
-        } else {
-            return null;
-        }
-    }
 
     public int size() {
         return size;
